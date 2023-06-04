@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <link rel="stylesheet" href="style.css">
+        <title>BUZZER</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="scripteQPUC.js"></script>
+        <script src="scripte.js"></script>
+    </head>
+    <body>
+        
+        <nav>
+            
+        </nav>
+
+        <main>
+            <header>
+                <div class="logo">
+                    <img src="images/logo2Simple.svg" alt="la meilleur personne de Robotronik">
+                    <button class="grayButton" onclick="fonctionBoutonPresse('Start:/');">Retour</button>
+                </div>
+                <div class="headerTitle">
+                    <h1>BUZZER</h1>
+                    <img src="images/spart.svg" alt="drapeau spart" class="drapeauSpart">
+                    <div class="headerTitleBuzzerStatus">
+                        <div class="StatuBuzzer">
+                            <div class="circle" id="StatusBuzzer1">1</div>
+                            <div class="circle" id="StatusBuzzer2">2</div>
+                            <div class="circle" id="StatusBuzzer3">3</div>
+                            <div class="circle" id="StatusBuzzer4">4</div>
+                            <div class="circle" id="StatusBuzzer5">5</div>
+                            <div class="circle" id="StatusBuzzer6">6</div>
+                        </div>
+                        <legend class="byGuillaumeDalle">by Guillaume DALLE</legend>
+                    </div>                    
+                </div> 
+                <div class="logo">
+                    <img src="images/RobotronikFondBlanc.svg" alt="la meilleur association de phelma">
+                    <img src="images/GrenobleINP.svg" alt="la meilleur ecole de grenoble INP">
+                </div>              
+            </header>
+            <section>
+
+                <div class="allBuzzerCadran">
+                    <div class="buzzercadran">
+                        <div class="buzzerNum">
+                            1
+                        </div>
+                        <div class="buzzercadranPoints" id="scoreBuzzer1">
+                            1
+                        </div>
+                        <div class="buzzercadranBoutons">
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer1M')">-</button>
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer1P')">+</button>
+                        </div>                    
+                    </div>
+
+                    
+                    <div class="buzzercadran">
+                        <div class="buzzerNum">
+                            2
+                        </div>
+                        <div class="buzzercadranPoints" id="scoreBuzzer2">
+                            1
+                        </div>
+                        <div class="buzzercadranBoutons">
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer2M')">-</button>
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer2P')">+</button>
+                        </div>                    
+                    </div>
+
+
+                    <div class="buzzercadran">
+                        <div class="buzzerNum">
+                            3
+                        </div>
+                        <div class="buzzercadranPoints" id="scoreBuzzer3">
+                            1
+                        </div>
+                        <div class="buzzercadranBoutons">
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer3M')">-</button>
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer3P')">+</button>
+                        </div>                    
+                    </div>
+
+
+                    <div class="buzzercadran">
+                        <div class="buzzerNum">
+                            4
+                        </div>
+                        <div class="buzzercadranPoints" id="scoreBuzzer4"> 
+                            1
+                        </div>
+                        <div class="buzzercadranBoutons">
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer4M')">-</button>
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer4P')">+</button>
+                        </div>                    
+                    </div>
+
+
+                    <div class="buzzercadran">
+                        <div class="buzzerNum">
+                            5
+                        </div>
+                        <div class="buzzercadranPoints" id="scoreBuzzer5">
+                            1
+                        </div>
+                        <div class="buzzercadranBoutons">
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer5M')">-</button>
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer5P')">+</button>
+                        </div>                    
+                    </div>
+
+
+                    <div class="buzzercadran">
+                        <div class="buzzerNum">
+                            6
+                        </div>
+                        <div class="buzzercadranPoints" id="scoreBuzzer6">
+                            1
+                        </div>
+                        <div class="buzzercadranBoutons">
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer6M')">-</button>
+                            <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer6P')">+</button>
+                        </div>                    
+                    </div>
+                </div>
+                
+
+
+                <div class="AcceptRefuse">
+                    <button onclick="fonctionBoutonPresse('boutonRefuser')" class="buttonAcceptRefuse redButton">Refuser</button>
+                    <button onclick="fonctionBoutonPresse('boutonAccepter')"class="buttonAcceptRefuse greenButton">Accepter</button>
+                </div>
+
+
+                <div class="controlBuzzer">
+
+                    <div class="switchControl">
+                        <div class="caseSwitchControl">
+                            <div class="leSwitchControl">
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitchBuzzerDisable" tabindex="0" onclick="fonctionBoutonPresse('checkboxDesactivation:'+this.checked.toString())">
+                                    <label class="onoffswitch-label" for="onoffswitchBuzzerDisable"></label>
+                                </div>
+                            </div>
+                            <p>Desactiver Buzzer</p>
+                        </div>
+
+                        
+                    </div>
+                    <div class="buttonControl">
+                        <button class="grayButton" onclick="fonctionBoutonPresse('boutonStop')">Stop</button>
+                        <button class="grayButton" onclick="fonctionBoutonPresse('boutonReset')">Reset</button>
+                        <button class="grayButton"></button>
+                        <button class="grayButton"></button>
+                        <button class="grayButton"></button>
+                        <button class="grayButton"></button>
+                    </div>
+                </div>
+
+
+                
+
+                
+            </section>
+        </main>
+
+    </body>
+</html>

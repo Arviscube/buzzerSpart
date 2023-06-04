@@ -1,0 +1,294 @@
+body{
+    margin: 0;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    min-width: 40vh;
+}
+main{
+    height: 100vh;
+    width: 100%;
+    background-color:rgb(147, 167, 187);
+}
+
+
+.allBuzzerCadran{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-around;
+    height: 30vh;
+}
+
+.buzzercadran{
+    width:30%;
+    height: 35%;
+    margin: 10px 0px 10px 0px;
+    border: 0px;
+    background: rgb(99, 113, 129);
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: black;
+}
+
+.buzzercadranPoints{
+    font-size: 5vh;
+    vertical-align: middle;
+    text-align: center;
+    height: 50%;
+    margin: 0;
+    border: 0;
+}
+
+
+.buzzercadranBoutons{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    height: 50%;
+    margin: 0;
+    border: 0;
+    font-size: 2.5vh;
+}
+.buzzercadranBoutons button{
+    font-size: 3vh;vertical-align: bottom;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    height: 70%;
+    width: 40%;
+    border-radius: 5px;
+}
+
+.buzzerNum{
+    position: absolute;
+    margin: 1px;
+}
+
+header{
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    background-color: rgb(99, 113, 129)
+}
+
+.headerTitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:center;
+    width: 80%;
+    border: 0;
+}
+.headerTitleBuzzerStatus{
+    font-size: 1.5vh;
+    display: flex;
+    flex-direction:row;
+    width: 95%;
+    justify-content: space-between;
+    align-items:center;
+    border: 0;
+}
+.StatuBuzzer{
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+}
+
+.circle {
+    width: 2.5vh;
+    height: 2.5vh;
+    font-size: 2vh;
+    border-radius: 50%;
+    background-color: red;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+  }
+
+.logo{
+    width: 20%;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo img{
+    width: 80%;
+}
+.logo button{
+    width: 80%;
+    height: 30%;
+    font-size: 2vh;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    border: 0;
+    margin: 10px 0 -10px 0;
+    font-size: 5vh;
+}
+
+.drapeauSpart{
+    height: 50%;
+}
+
+.AcceptRefuse{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20vh; 
+}
+.buttonAcceptRefuse{
+    width: 40%;
+    height: 50%;
+    font-size: 2.5vh;
+    border-radius: 10px;
+}
+
+.BoutonMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+}
+.BoutonMenu button{
+    width: 60%;
+    height: 10%;
+    font-size: 2.5vh;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.controlBuzzer{
+    height: 30vh;
+    width: 100%;
+    display: flex;
+}
+
+.switchControl{
+    width: 50%;
+    height: 100%;
+}
+
+.buttonControl{
+    width: 50%;
+    height: 100%;
+}
+
+.caseSwitchControl{
+    height: 33%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.leSwitchControl{
+    width: 35%;
+    aspect-ratio: 2 / 1;
+    margin: 5px;
+}
+
+.caseSwitchControl p{
+    text-align: center;
+    width: 50%;
+    font-size: 2.5vh;
+}
+
+
+.buttonControl{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.buttonControl button{
+    width: 40%;
+    height: 27%;
+    font-size: 2.5vh;
+    border-radius: 10px;
+}
+
+
+button:active{ 
+    background-color: rgb(37, 61, 78);
+    border-color: black;
+}
+
+@media (hover:hover) {
+    button:hover{ 
+        border-color: white;
+    }
+}
+
+@media (min-aspect-ratio: 7/9) {
+    main{
+        width: 77vh;
+    }
+  }
+
+
+
+
+.greenButton{
+    background-color: rgb(52, 167, 52);
+}
+.redButton{
+    background-color: red;
+}
+
+.grayButton{
+    background-color: rgb(112, 174, 219);
+}
+
+
+  .onoffswitch {
+    position: relative; width: 100%;
+    height: 100%;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0vw 0vw 0vw 0vw;
+  }
+  .onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 100%; line-height: 0;
+    border: 0px solid rgb(112, 174, 219);; 
+    border-radius: 50% / 100%;
+    background-color: rgb(99, 113, 129);
+  }
+  .onoffswitch-label:before {
+    content: "";
+    display: block; width:45%;height: 90%; margin: 0;
+    background: rgb(112, 174, 219);;
+    position: absolute; top: 5%; bottom: 0;
+    left: 2.5%;/*1 pixel de plus*/
+    border-radius: 50% / 50%;
+  }
+  .onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: rgb(1, 117, 1);;
+  }
+  .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: rgb(52, 167, 52);;
+  }
+  .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+  }
+  .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 2.5%; 
+    left: auto;
+    background-color: rgb(112, 174, 219);; 
+  }
