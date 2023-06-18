@@ -20,17 +20,12 @@ function SoundPlay(sound){
 function commandeAnalyse(message){
     var separated;
     separated = separerCommandeEtValeur(message)
-    if(separated.command=='SoundPlay'){
-        SoundPlay(separated.value);
+    if(separated.command=='loadPage'){
+            var sectionElement = document.querySelector('section');
+            sectionElement.innerHTML = separated.value;
     }
-    else if(separated.command=='loadPage'){
-        const url = new URL(window.location.href);
-        const path = url.pathname;
-        socket.send("OldPath:"+path);
-        socket.send("NewPath:"+separated.value);
-        if(path!=separated.value){
-            window.location.href=separated.value;
-        }
+    else if(separated.command=='SoundPlay'){
+        SoundPlay(separated.value);
     }
     else if(separated.command=='StatusBuzzer1'){
         const divStatus = document.getElementById("StatusBuzzer1")
@@ -57,7 +52,7 @@ function commandeAnalyse(message){
         divStatus.style.background = separated.value;     
     }
     else{
-        commandeAnalyseSuite(message);
+        commandeAnalyseSuite(separated);
     }
 }
 
@@ -113,6 +108,9 @@ function connect() {
     if(socket!=null){
         socket.addEventListener('open', (event) => {
             console.log('Connecté au serveur WebSocket');
+            const date = new Date();
+            console.log(date);
+            socket.send("date:"+date);
         });
           
         socket.addEventListener('message', (event) => {

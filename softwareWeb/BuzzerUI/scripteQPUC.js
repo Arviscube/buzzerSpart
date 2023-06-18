@@ -1,7 +1,4 @@
-function commandeAnalyseSuite(message){
-    console.log(message);
-    var separated;
-    separated = separerCommandeEtValeur(message)
+function commandeAnalyseSuite(separated){
     if(separated.command=='changeScoreBuzzer1'){
         const divScore = document.getElementById("scoreBuzzer1")
         divScore.innerText = separated.value;     
@@ -20,7 +17,7 @@ function commandeAnalyseSuite(message){
     }
     else if(separated.command=='changeScoreBuzzer5'){
         const divScore = document.getElementById("scoreBuzzer5")
-        divScore.innerText = separated.value;     
+        divScore.innerText = separated.value;
     }
     else if(separated.command=='changeScoreBuzzer6'){
         const divScore = document.getElementById("scoreBuzzer6")
@@ -29,14 +26,3 @@ function commandeAnalyseSuite(message){
 }
 
 
-function separerCommandeEtValeur(chaine) {
-    const separator = ':';
-    const indexSeparator = chaine.indexOf(separator);
-    
-    if (indexSeparator === -1) {
-      return chaine;
-    }   
-    const command = chaine.substring(0, indexSeparator).trim();
-    const value = chaine.substring(indexSeparator + 1).trim();
-    return { command, value };
-}

@@ -1,16 +1,20 @@
 const http = require('http')
 const fs = require('fs')
-const port = 3000
 const express = require('express');
 const app = express();
 
 const webServeur = require('./webServeur');
 const TCPServeur = require('./TCPServeur');
-const QPUC = require('./Jeux/QuestionPourUnChampion');
+const QPUCGame = require('./Jeux/QuestionPourUnChampion');
+const AnimationGame = require('./Jeux/Animation');
 
-//Variable
-var Points = 1;
-var jeuxEnCours = "/";
+
+const port = 3000
+var staticFilesPath = '/../BuzzerUI';
+staticFilesPath = __dirname + staticFilesPath;
+console.log(staticFilesPath);
+var jeuxEnCours = "/menu.html";
+var firstConnection = false;
 
 
 webServeur.setcallbackOnConnection(interfaceConnection);
@@ -18,43 +22,80 @@ webServeur.setcallbackOnData(receiveMessageFromInterface);
 TCPServeur.setcallbackOnData(receiveMessageFromBuzzer);
 TCPServeur.setcallbackBuzzerStatusChange(StatusBuzzer);
 
-QPUC.setcallbackSendToBuzzerQPUC(TCPServeur.sendMessageToBuzzer);
-QPUC.setcallbackSendToInterfaceQPUC(webServeur.sendMessageToInterface);
 
-function interfaceConnection(){
-  webServeur.sendMessageToInterface('loadPage:'+jeuxEnCours);
+function setcallbackGame(game){
+  if(game == "/QuestionPourUnChampion.html"){
+    QPUCGame.setcallbackSendToBuzzer(TCPServeur.sendMessageToBuzzer);
+    QPUCGame.setcallbackSendToInterface(webServeur.sendMessageToInterface);
+  }
+  else if(game == "/Animation.html"){
+    AnimationGame.setcallbackSendToBuzzer(TCPServeur.sendMessageToBuzzer);
+    AnimationGame.setcallbackSendToInterface(webServeur.sendMessageToInterface);
+  }
 }
 
+
+function interfaceConnection(){
+  fs.readFile(staticFilesPath+jeuxEnCours, 'utf8', (err, fileContent) => {
+    if (err) {
+      console.error('Une erreur s\'est produite lors de la lecture du fichier :', err);
+    }
+    else{
+      webServeur.sendMessageToInterface('loadPage:' + fileContent);
+    }
+  });
+}
+
+
+//== massage from buzzer to serveur ================================================================
+
 function receiveMessageFromBuzzer(message){
-  console.log(message);
-  if(jeuxEnCours=="StartQPUC"){
-    QPUC.fromBuzzer(message);
+  var separated =  separerCommandeEtValeur(message); 
+  if(jeuxEnCours=="/QuestionPourUnChampion.html"){
+    QPUCGame.fromBuzzer(separated);
+  }
+  else if(jeuxEnCours == '/Animation'){
+    AnimationGame.fromBuzzer(separated);
   }
   else if(jeuxEnCours == 'StartReflexe'){
 
   }
 };
 
+//== message from interface to serveur ================================================================
 function receiveMessageFromInterface(message){
-  console.log(message);
   var separated =  separerCommandeEtValeur(message);  
   if(separated.command == "Start"){
-    console.log(jeuxEnCours);
     jeuxEnCours = separated.value;
-    webServeur.sendMessageToInterface('loadPage:'+jeuxEnCours);
+    console.log("\n\n== "+ jeuxEnCours + " ================================================");
+    setcallbackGame(jeuxEnCours);
+    fs.readFile(staticFilesPath+jeuxEnCours, 'utf8', (err, fileContent) => {
+      if (err) {
+        console.error('Une erreur s\'est produite lors de la lecture du fichier :', err);
+      }
+      else{
+        webServeur.sendMessageToInterface('loadPage:' + fileContent);
+      }
+    });
   }
-  else if(jeuxEnCours == 'StartReflexe'){
-    jeuxEnCours = message;
+  else if(separated.command == "date"){
+    setDate(separated.value);
   }
-  console.log(message);
 
-  if(jeuxEnCours=="StartQPUC"){
-    QPUC.fromInterface(message);
+  if(jeuxEnCours == '/menu.html'){
+    webServeur.sendMessageToInterface('SoundPlay')
   }
-  else if(jeuxEnCours == 'StartReflexe'){
-
+  else if(jeuxEnCours=="/QuestionPourUnChampion.html"){
+    QPUCGame.fromInterface(separated);
   }
+  else if(jeuxEnCours == "/Animation.html"){
+    AnimationGame.fromInterface(separated);
+  }
+ 
 };
+
+
+//=====================================================================================================
 
 
 function separerCommandeEtValeur(chaine) {
@@ -84,13 +125,35 @@ function StatusBuzzer(message){
 
 
 
+const { exec } = require('child_process');
+
+// Fonction pour changer la date du serveur
+function setDate(newDate) {
+  if (firstConnection == false){
+    firstConnection = true
+    const command = `date -s "${newDate}"`;
+
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Une erreur s'est produite lors de la modification de la date : ${error.message}`);
+        return;
+      }
+  
+      if (stderr) {
+        console.error(`Erreur de sortie de la commande : ${stderr}`);
+        return;
+      }
+  
+      console.log(`La date a été modifiée avec succès.`);
+    });
+  }
+}
 
 
 
 
-var staticFilesPath = '/../BuzzerUI';
-staticFilesPath = __dirname + staticFilesPath;
-console.log(staticFilesPath);
+
+
 app.use(express.static(staticFilesPath, { index: 'index.html' }));
 
 

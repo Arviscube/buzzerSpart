@@ -36,7 +36,7 @@ const fromInterface = (separated) =>{
 
 
 const fromBuzzer = (separated) =>{
-
+    
 }
 
 //== Code QCPU finish here ===============================================
