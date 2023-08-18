@@ -2,11 +2,10 @@
 #include <ESPAsyncWebServer.h>
 
 
-const char *ssid = "SFR_A018";
-const char *password = "ickwoon2ectrimplesso";
-
+const char *ssid = "wifiGui";
+const char *password = "azertyui";
 const uint16_t port = 8088;
-const char * host = "192.168.1.65";
+const char * host = "192.168.43.156";
 
 WiFiServer server(8088);
 
