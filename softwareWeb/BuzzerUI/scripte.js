@@ -3,6 +3,9 @@ var socket = null;
 var ackConnection = -1;
 var interval;
 
+// var mon_url = 'scripteQPUC.js';
+// loadScript(mon_url);
+
 
 function fonctionBoutonPresse(bouton){
     socket.send(bouton);
@@ -104,7 +107,7 @@ function connect() {
         delete(socket)        
         socket = null;
     }
-    socket = new WebSocket('ws://192.168.178.30:8080');
+    socket = new WebSocket('ws://192.168.1.65:8080');
     if(socket!=null){
         socket.addEventListener('open', (event) => {
             console.log('Connecté au serveur WebSocket');

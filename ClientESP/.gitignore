@@ -1,0 +1,21 @@
+# PlatformIO Project Settings
+.platformio
+.pio
+
+# Ignore build files
+/.pio
+/.pioenvs
+/.piolibdeps
+/.vscode
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore system files from macOS
+.DS_Store
+
+# Ignore temporary files and directories
+*.swp
+*~
+

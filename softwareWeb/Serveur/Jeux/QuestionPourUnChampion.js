@@ -36,7 +36,10 @@ const fromInterface = (separated) =>{
 
 
 const fromBuzzer = (separated) =>{
-
+    console.log(separated);
+    sendMesssageToInterface('changeScoreBuzzer5:'+Points)
+    sendMesssageToInterface('SoundPlay:sons/buzze.wav')
+    Points++;
 }
 
 //== Code QCPU finish here ===============================================
