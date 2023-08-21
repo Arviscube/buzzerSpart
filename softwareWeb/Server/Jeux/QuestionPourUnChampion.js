@@ -39,6 +39,8 @@ const fromBuzzer = (separated) =>{
     console.log(separated);
     sendMesssageToInterface('changeScoreBuzzer5:'+Points)
     sendMesssageToInterface('SoundPlay:sons/buzze.wav')
+    sendMesssageToBuzzer('lightBuzzer2:'+Points%2+';')
+    sendMesssageToBuzzer('ledBuzzer2:red,red,spart,red,red;')
     Points++;
 }
 
