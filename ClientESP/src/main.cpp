@@ -3,7 +3,7 @@
 #include <string>
 #include "ledSpi.h"
 
-#define BUZZERNUMBER 4
+#define BUZZERNUMBER 1
 const char *ssid = "BuzzerSpart";
 const char *password = "robotronik";
 const uint16_t port = 8088;
@@ -65,14 +65,14 @@ void loop() {
   Serial.print("connection to the serveur...");
   while (!client.connect(host, port)){
     Serial.print(".");
-    delay(100);
+    delay(10);
   }
   Serial.println("");
   Serial.println("Connected to server successful!");
 
   while (client.connected()){
     client.print((String)"!buzzer" + BUZZERNUMBER + ":ok");
-    delay(100);
+    delay(10);
 
     if (client.available()) {
       int i = 0;
