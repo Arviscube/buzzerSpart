@@ -5,9 +5,9 @@ After=network.target
 [Service]
 ExecStart=sudo /usr/bin/node BUZZERDIR/Server/index.js
 WorkingDirectory=BUZZERDIR
-Restart=always
-User=utilisateur
-Group=utilisateur
+Restart=no
+User=buzzer
+Group=buzzer
 
 [Install]
 WantedBy=multi-user.target
