@@ -37,11 +37,17 @@ const fromInterface = (separated) =>{
 
 const fromBuzzer = (separated) =>{
     console.log(separated);
-    sendMesssageToInterface('changeScoreBuzzer5:'+Points)
-    sendMesssageToInterface('SoundPlay:sons/buzze.wav')
-    sendMesssageToBuzzer('lightBuzzer2:'+Points%2+';')
-    sendMesssageToBuzzer('ledBuzzer2:red,red,spart,red,red;')
-    Points++;
+    if(separated.value == "1"){
+        sendMesssageToInterface('changeScoreBuzzer5:'+Points)
+        sendMesssageToInterface('SoundPlay:sons/buzze.wav')
+        sendMesssageToBuzzer('lightBuzzer2:'+Points%2+';')
+        sendMesssageToBuzzer('ledBuzzer2:red,red,spart,red,red;')
+        Points++;
+    }
+    else{
+        sendMesssageToBuzzer('ledBuzzer2:green,green,green,green,green;')
+    }
+    
 }
 
 //== Code QCPU finish here ===============================================

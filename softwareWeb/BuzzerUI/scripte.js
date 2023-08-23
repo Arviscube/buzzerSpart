@@ -107,7 +107,7 @@ function connect() {
         delete(socket)        
         socket = null;
     }
-    socket = new WebSocket('ws://192.168.43.102:8080');
+    socket = new WebSocket('ws://192.168.8.2:8080');
     if(socket!=null){
         socket.addEventListener('open', (event) => {
             console.log('Connecté au serveur WebSocket');

@@ -3,11 +3,11 @@
 #include <string>
 #include "ledSpi.h"
 
-#define BUZZERNUMBER 2
-const char *ssid = "wifiGui";
-const char *password = "azertyui";
+#define BUZZERNUMBER 4
+const char *ssid = "BuzzerSpart";
+const char *password = "robotronik";
 const uint16_t port = 8088;
-const char * host = "192.168.43.102";
+const char * host = "192.168.8.2";
 
 WiFiServer server(8088);
 
@@ -21,18 +21,15 @@ String messageButtonPress = ((String)"!boutonBuzzer" + BUZZERNUMBER + ":0");
 void RequestTraitement(void);
 
 void setup() {
+
   //----------------------------------------------------GPIO
   pinMode(PINLED,OUTPUT);
   pinMode(PINBUTTON,INPUT);
+  digitalWrite(PINLED,1);
+  delay(1000);
+  digitalWrite(PINLED,0);
+  delay(1000);
 
-  digitalWrite(PINLED,1);
-  delay(1000);
-  digitalWrite(PINLED,0);
-  delay(1000);
-  digitalWrite(PINLED,1);
-  delay(500);
-  digitalWrite(PINLED,0);
-  delay(500);
 
   //----------------------------------------------------Serial
   Serial.begin(115200);
@@ -56,7 +53,8 @@ void setup() {
 	Serial.println(WiFi.localIP());
 
   //----------------------------------------------------LED
-  ledSpiSetup();  
+  ledSpiSetup();
+  //ledTest();
 
 }
 
@@ -113,7 +111,7 @@ void RequestTraitement(void){
     Serial.print(BuzzerNumber);
     Serial.print(", action : ");
     Serial.println(action);
-    if(BuzzerNumber==2){
+    if(BuzzerNumber==BUZZERNUMBER){
       if((String)commande == "lightBuzzer"){
         Serial.println(((String)action).toInt());
         digitalWrite(PINLED,((String)action).toInt());

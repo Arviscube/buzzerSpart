@@ -173,6 +173,14 @@ void detectStandarColor(const char *input,color* colorLed){
         colorLed->red = 255;
         colorLed->green = 192;
         colorLed->blue = 203;
+    } else if (strcmp(input, "off") == 0) {
+        colorLed->red = 0;
+        colorLed->green = 0;
+        colorLed->blue = 0;
+    } else if (strcmp(input, "black") == 0) {
+        colorLed->red = 0;
+        colorLed->green = 0;
+        colorLed->blue = 0;
     }
 }
 
@@ -199,29 +207,3 @@ void ledupdate(void){
     SPI.transfer((uint8_t)255);
 }
 
-// void ledSpiStart(void){
-//     SPI.transfer((uint8_t)0);
-//     SPI.transfer((uint8_t)0);
-//     SPI.transfer((uint8_t)0);
-//     SPI.transfer((uint8_t)0);
-//     for(int i=0;i<3;i++){
-//         SPI.transfer((uint8_t)255);
-//         SPI.transfer((uint8_t)0);
-//         SPI.transfer((uint8_t)0);
-//         SPI.transfer((uint8_t)0);
-//     }
-// }
-// void ledSpiColor(void){
-
-// }
-//     for(int i=3;i<8;i++){
-//         SPI.transfer((uint8_t)255);
-//         SPI.transfer((uint8_t)0);
-//         SPI.transfer((uint8_t)0);
-//         SPI.transfer((uint8_t)255);
-//     }
-//     SPI.transfer((uint8_t)255);
-//     SPI.transfer((uint8_t)255);
-//     SPI.transfer((uint8_t)255);
-//     SPI.transfer((uint8_t)255);
-// }
