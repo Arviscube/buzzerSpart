@@ -65,7 +65,7 @@ void loop() {
   Serial.print("connection to the serveur...");
   while (!client.connect(host, port)){
     Serial.print(".");
-    delay(10);
+    delay(100);
   }
   Serial.println("");
   Serial.println("Connected to server successful!");
