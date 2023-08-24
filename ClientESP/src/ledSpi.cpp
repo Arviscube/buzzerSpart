@@ -5,41 +5,48 @@ unsigned long timePreAnimation;
 bool etatFlashAnimation;
 int splitString_NumLed;
 color ledColor5[5];
+animation_t animation;
+unsigned long animationTime = 0;
+bool toggleAnimation = false;
 
 void splitString_rec(char *input);
 void detectStandarColor(const char *input,color* colorLed);
 void ledupdate(void);
+void splitString(const char *input,int lenght);
 
 void ledSpiSetup(void){
-    SPI.begin();
-    SPI.begin(PINSPICLK,-1,PINSPIMOSI,-1);
+    SPI.begin(PINSPICLK,12,PINSPIMOSI,15);
     for(int i =0; i<5;i++){
         ledColor5[i].brightness = 255;
         ledColor5[i].red = 0;
         ledColor5[i].green = 0;
         ledColor5[i].blue = 0;
+        ledColor5[i].aniamation = NONE;
     }
     ledSpiOff();
 }
 
+void ledSpiLoop(void){
+    if(animation==FLASH){
+        if(animationTime < millis()){
+            animationTime = millis() + 50;
+            if(toggleAnimation){
+                toggleAnimation = !toggleAnimation;
+                splitString("spart,spart,spart,spart,spart",80);
+            }
+            else {
+                toggleAnimation = !toggleAnimation;
+                splitString("off,off,off,off,off",80);
+            }
+            
+        }
+    }
+}
 
 
 
 void ledSpiOff(void){
-    SPI.transfer((uint8_t)0);
-    SPI.transfer((uint8_t)0);
-    SPI.transfer((uint8_t)0);
-    SPI.transfer((uint8_t)0); 
-    for(int i=0;i<13;i++){
-        SPI.transfer((uint8_t)255);
-        SPI.transfer((uint8_t)0);
-        SPI.transfer((uint8_t)0);
-        SPI.transfer((uint8_t)0);
-    }
-    SPI.transfer((uint8_t)255);
-    SPI.transfer((uint8_t)255);
-    SPI.transfer((uint8_t)255);
-    SPI.transfer((uint8_t)255);
+    ledSpiCommand("off,off,off,off,off",80);
 }
 
 
@@ -62,13 +69,24 @@ void ledTest(void){
     SPI.transfer((uint8_t)255);
 }
 
+void ledSpiCommand(const char *input,int lenght){
+    if(strcmp(input, "animation_Flash") == 0){
+        animation = FLASH;
+    }
+    else{
+        animation = NONE;
+        splitString(input,lenght);
+    }    
+}
+
+
 void splitString(const char *input,int lenght){
     splitString_NumLed = -1;
     char nonConstCopy[lenght];
     strcpy(nonConstCopy, input);
     splitString_rec(nonConstCopy);
     printColor();
-    ledupdate();
+    ledupdate(); 
 }
 
 

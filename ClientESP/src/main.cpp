@@ -3,7 +3,7 @@
 #include <string>
 #include "ledSpi.h"
 
-#define BUZZERNUMBER 1
+#define BUZZERNUMBER 6
 const char *ssid = "BuzzerSpart";
 const char *password = "robotronik";
 const uint16_t port = 8088;
@@ -23,12 +23,14 @@ void RequestTraitement(void);
 void setup() {
 
   //----------------------------------------------------GPIO
+
   pinMode(PINLED,OUTPUT);
   pinMode(PINBUTTON,INPUT);
-  digitalWrite(PINLED,1);
-  delay(1000);
-  digitalWrite(PINLED,0);
-  delay(1000);
+
+  // digitalWrite(PINLED,HIGH);
+  // delay(1000);
+  // digitalWrite(PINLED,LOW);
+  // delay(1000);
 
 
   //----------------------------------------------------Serial
@@ -36,15 +38,24 @@ void setup() {
   Serial.println("ESP Strating\n");
   Serial.println(ssid);
 
+  //----------------------------------------------------LED
+  ledSpiSetup();
+  ledSpiCommand("spart,off,off,off,off",100);
+  //ledTest();
+
   //----------------------------------------------------WIFI
   WiFi.begin(ssid, password);
 
 	Serial.print("Tentative de connexion...");
 	
+  unsigned long timeBeforeRebooting = 10000 + millis();
 	while(WiFi.status() != WL_CONNECTED)
 	{
 		Serial.print(".");
 		delay(100);
+    if(timeBeforeRebooting<millis()){
+      ESP.restart();
+    }
 	}
 	
 	Serial.println("\n");
@@ -52,15 +63,13 @@ void setup() {
 	Serial.print("Adresse IP: ");
 	Serial.println(WiFi.localIP());
 
-  //----------------------------------------------------LED
-  ledSpiSetup();
-  //ledTest();
+  ledSpiCommand("spart,spart,off,off,off",100);
 
 }
 
 void loop() {
   /* listen for client */
-  WiFiClient client;
+  WiFiClient client;  
 
   Serial.print("connection to the serveur...");
   while (!client.connect(host, port)){
@@ -70,9 +79,19 @@ void loop() {
   Serial.println("");
   Serial.println("Connected to server successful!");
 
+  //animation to check that all is ok
+  ledSpiCommand("animation_Flash",100);
+  unsigned long timePlayDebugAnimation = 1500 + millis();
+  while(timePlayDebugAnimation>millis()){ledSpiLoop();}
+  ledSpiOff();
+
+
+  //----------------------------------------------------START
+
   while (client.connected()){
     client.print((String)"!buzzer" + BUZZERNUMBER + ":ok");
     delay(10);
+    ledSpiLoop();
 
     if (client.available()) {
       int i = 0;
@@ -117,7 +136,7 @@ void RequestTraitement(void){
         digitalWrite(PINLED,((String)action).toInt());
       }
       else if((String)commande == "ledBuzzer"){
-        splitString(action,100);
+        ledSpiCommand(action,100);
       }
     }
   }
