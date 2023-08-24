@@ -1,11 +1,11 @@
 
 <div class="allBuzzerCadran">
-    <div class="buzzercadran">
+    <div class="buzzercadran" id="buzzercadranBuzzer1">
         <div class="buzzerNum">
             1
         </div>
         <div class="buzzercadranPoints" id="scoreBuzzer1">
-            1
+            0
         </div>
         <div class="buzzercadranBoutons">
             <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer1M')">-</button>
@@ -14,12 +14,12 @@
     </div>
 
     
-    <div class="buzzercadran">
+    <div class="buzzercadran" id="buzzercadranBuzzer2">
         <div class="buzzerNum">
             2
         </div>
         <div class="buzzercadranPoints" id="scoreBuzzer2">
-            1
+            0
         </div>
         <div class="buzzercadranBoutons">
             <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer2M')">-</button>
@@ -28,12 +28,12 @@
     </div>
 
 
-    <div class="buzzercadran">
+    <div class="buzzercadran" id="buzzercadranBuzzer3">
         <div class="buzzerNum">
             3
         </div>
         <div class="buzzercadranPoints" id="scoreBuzzer3">
-            1
+            0
         </div>
         <div class="buzzercadranBoutons">
             <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer3M')">-</button>
@@ -42,12 +42,12 @@
     </div>
 
 
-    <div class="buzzercadran">
+    <div class="buzzercadran" id="buzzercadranBuzzer4">
         <div class="buzzerNum">
             4
         </div>
         <div class="buzzercadranPoints" id="scoreBuzzer4"> 
-            1
+            0
         </div>
         <div class="buzzercadranBoutons">
             <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer4M')">-</button>
@@ -56,12 +56,12 @@
     </div>
 
 
-    <div class="buzzercadran">
+    <div class="buzzercadran" id="buzzercadranBuzzer5">
         <div class="buzzerNum">
             5
         </div>
         <div class="buzzercadranPoints" id="scoreBuzzer5">
-            1
+            0
         </div>
         <div class="buzzercadranBoutons">
             <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer5M')">-</button>
@@ -70,12 +70,12 @@
     </div>
 
 
-    <div class="buzzercadran">
+    <div class="buzzercadran" id="buzzercadranBuzzer6">
         <div class="buzzerNum">
             6
         </div>
         <div class="buzzercadranPoints" id="scoreBuzzer6">
-            1
+            0
         </div>
         <div class="buzzercadranBoutons">
             <button class="grayButton" onclick="fonctionBoutonPresse('boutonBuzzer6M')">-</button>
@@ -103,10 +103,19 @@
                 </div>
             </div>
             <p>Desactiver Buzzer</p>
-        </div>
-
+        </div>  
         
+        <div class="caseSwitchControl">
+            <div class="leSwitchControl">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="onoffswitchcheckboxMatchEn3Points" tabindex="0" onclick="fonctionBoutonPresse('checkboxMatchEn3Points:'+this.checked.toString())">
+                    <label class="onoffswitch-label" for="onoffswitchcheckboxMatchEn3Points"></label>
+                </div>
+            </div>
+            <p>Match en 3 points</p>
+        </div>  
     </div>
+
     <div class="buttonControl">
         <button class="grayButton" onclick="fonctionBoutonPresse('boutonStop')">Stop</button>
         <button class="grayButton" onclick="fonctionBoutonPresse('boutonReset')">Reset</button>

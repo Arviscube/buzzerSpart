@@ -103,7 +103,8 @@ function separerCommandeEtValeur(chaine) {
   const indexSeparator = chaine.indexOf(separator);
   
   if (indexSeparator === -1) {
-    return chaine;
+    const command = chaine
+    return {command};
   }   
   const command = chaine.substring(0, indexSeparator).trim();
   const value = chaine.substring(indexSeparator + 1).trim();
