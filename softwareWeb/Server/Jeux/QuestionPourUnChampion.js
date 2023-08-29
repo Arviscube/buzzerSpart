@@ -86,7 +86,7 @@ const fromInterface = (separated) =>{
         setTimeout(() => {
             currentState = State.PLAY;
             console.log(currentState)
-          }, 1000);        
+          }, 500);        
     }
     else if(separated.command == "checkboxDesactivation" && separated.value == "true"){
         buzzerisLock = true
@@ -102,6 +102,23 @@ const fromInterface = (separated) =>{
     else if(separated.command == "checkboxMatchEn3Points" && separated.value == "false"){
         currentMatch3PointWinner = false
         updateaffichagePoint()
+        checkWinner()
+    }
+    else if(separated.command.slice(0, -2) == "boutonChangeScore"){
+        if(separated.command.slice(-1)=="M"){
+            var numBuzzerScoreChange = parseInt(separated.command.slice(-2,-1))
+            if(Points[numBuzzerScoreChange-1]>0){
+                Points[numBuzzerScoreChange-1] = Points[numBuzzerScoreChange-1] - 1;
+            }            
+        }
+        else{
+            var numBuzzerScoreChange = parseInt(separated.command.slice(-2,-1))
+            if(Points[numBuzzerScoreChange-1]<5 && !currentMatch3PointWinner || Points[numBuzzerScoreChange-1]<3 && currentMatch3PointWinner){
+                Points[numBuzzerScoreChange-1] = Points[numBuzzerScoreChange-1] + 1;
+            }   
+        }
+        updateaffichagePoint()
+        updateInterfaceweb()
         checkWinner()
     }
 
@@ -124,8 +141,8 @@ const fromBuzzer = (separated) =>{
         sendMesssageToBuzzer('lightBuzzer'+numBuzzerThatBuzzed+':1;')
         sendMesssageToBuzzer('ledBuzzer'+numBuzzerThatBuzzed+':animation_Flash;')
         setTimeout(() => {
-            updateaffichagePoint()
-            updateInterfaceweb()
+                updateaffichagePoint()
+                updateInterfaceweb()          
         }, 2000);
         currentState = State.ACCEPTREFUSE
         console.log(currentState)        
@@ -157,8 +174,6 @@ function updateInterfaceweb(){
 function updateaffichagePoint(){
     if(currentMatch3PointWinner == false){
         for(var i = 0; i<6;i++){
-            console.log("test")
-            console.log(Points[i])
             if(Points[i]==0){sendMesssageToBuzzer('ledBuzzer'+(i+1)+':off,off,off,off,off;')}
             else if(Points[i]==1){sendMesssageToBuzzer('ledBuzzer'+(i+1)+':spart,off,off,off,off;')}
             else if(Points[i]==2){sendMesssageToBuzzer('ledBuzzer'+(i+1)+':spart,spart,off,off,off;')}

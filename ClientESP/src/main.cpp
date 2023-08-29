@@ -17,6 +17,7 @@ WiFiServer server(8088);
 char buffer[128];
 bool boutonpresse = false;
 String messageButtonPress = ((String)"!boutonBuzzer" + BUZZERNUMBER + ":0");
+unsigned long timeupdate = 0;
 
 void RequestTraitement(void);
 
@@ -89,8 +90,11 @@ void loop() {
   //----------------------------------------------------START
 
   while (client.connected()){
-    client.print((String)"!buzzer" + BUZZERNUMBER + ":ok");
-    delay(10);
+    if(timeupdate < millis()){
+      client.print((String)"!buzzer" + BUZZERNUMBER + ":ok");
+      timeupdate = millis() + 10;
+    }
+    
     ledSpiLoop();
 
     if (client.available()) {
@@ -107,6 +111,8 @@ void loop() {
     if(boutonpresse != digitalRead(GPIO_NUM_17)){
       boutonpresse = !boutonpresse;
       messageButtonPress[15] = boutonpresse + '0';
+      client.print(messageButtonPress);
+      client.print(messageButtonPress);
       client.print(messageButtonPress);
       delay(50);
     }

@@ -11,13 +11,17 @@ function fonctionBoutonPresse(bouton){
     socket.send(bouton);
 }
 
+
 function SoundPlay(sound){
-    if(audio!=null){
-        audio.pause();
-        delete(audio)
-    }   
+    SoundStop();
     audio = new Audio(sound);
     audio.play();
+}
+function SoundStop(){
+    if(audio!=null){
+        audio.pause();
+        delete(audio);
+    }   
 }
 
 function commandeAnalyse(message){
